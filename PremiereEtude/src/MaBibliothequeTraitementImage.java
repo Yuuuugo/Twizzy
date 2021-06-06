@@ -78,9 +78,16 @@ public class MaBibliothequeTraitementImage {
 
 
 	}
+	//Methode qui floute 
+	public static Mat blurring(Mat input) {
+	Mat dst = new Mat();
+	Imgproc.GaussianBlur(input,dst, new Size(9,9),500);
+	return dst;
+	}
 
 	//Methode qui permet de saturer les couleurs rouges à partir de 3 seuils
 	public static Mat seuillage(Mat input, int seuilRougeOrange, int seuilRougeViolet,int seuilSaturation){
+		
 		//Decomposition en 3 canaux HSV
 		Vector<Mat> channels = splitHSVChannels(input);
 		//création d'un seuil
