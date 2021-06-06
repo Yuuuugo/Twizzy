@@ -10,7 +10,7 @@ public class Principale {
 	{
 		//Ouverture le l'image et saturation des rouges
 		System.loadLibrary("opencv_java2413");
-		Mat m=Highgui.imread("p10.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+		Mat m=Highgui.imread("C:\\Users\\Hugo\\Desktop\\Plateau\\p2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
 		MaBibliothequeTraitementImageEtendue.afficheImage("Image testée", m);
 		Mat transformee=MaBibliothequeTraitementImageEtendue.transformeBGRversHSV(m);
 		//la methode seuillage est ici extraite de l'archivage jar du meme nom 
@@ -28,12 +28,12 @@ public class Principale {
 
 			if (objetrond!=null){
 				MaBibliothequeTraitementImage.afficheImage("Objet rond detécté", objetrond);
-				scores[0]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref30.jpg");
-				scores[1]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref50.jpg");
-				scores[2]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref70.jpg");
-				scores[3]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref90.jpg");
-				scores[4]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref110.jpg");
-				scores[5]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"refdouble.jpg");
+				scores[0]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"C:\\Users\\Hugo\\Desktop\\Plateau\\ref30.jpg");
+				scores[1]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"C:\\Users\\Hugo\\Desktop\\Plateau\\ref50.jpg");
+				scores[2]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"C:\\Users\\Hugo\\Desktop\\Plateau\\ref70.jpg");
+				scores[3]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"C:\\Users\\Hugo\\Desktop\\Plateau\\ref110.jpg");
+				scores[4]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"C:\\Users\\Hugo\\Desktop\\Plateau\\ref130.jpg");
+				scores[5]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"C:\\Users\\Hugo\\Desktop\\Plateau\\refdouble.jpg");
 
 
 				//recherche de l'index du maximum et affichage du panneau detecté

@@ -192,8 +192,8 @@ public class MaBibliothequeTraitementImageEtendue {
 
 	
 	//methode à completer
-	public static double Similitude(Mat object,String signfile) {
-
+	public static double Similitude(Mat panneau,String signfile) {
+/*
 		// Conversion du signe de reference en niveaux de gris et normalisation
 		Mat panneauref = Highgui.imread(signfile);
 		Mat graySign = new Mat(panneauref.rows(), panneauref.cols(), panneauref.type());
@@ -214,7 +214,44 @@ public class MaBibliothequeTraitementImageEtendue {
 		
 		
 		//à compléter...
+		*/
 		
+		//On met les deux images en gris//
+		Mat panneau_test = Highgui.imread(signfile,Highgui.CV_LOAD_IMAGE_COLOR);
+		Mat grayPanneau = new Mat(panneau.rows(), panneau.cols(), panneau.type());
+		Imgproc.cvtColor(panneau, grayPanneau, Imgproc.COLOR_BGRA2GRAY);
+		Core.normalize(grayPanneau, grayPanneau, 0, 255, Core.NORM_MINMAX);
+		
+		Mat gray_panneau_test = new Mat(panneau_test.rows(),panneau_test.cols(),panneau_test.type());
+		Imgproc.cvtColor(panneau_test, gray_panneau_test, Imgproc.COLOR_BGRA2GRAY);
+		Core.normalize(gray_panneau_test, gray_panneau_test,0,255,Core.NORM_MINMAX);
+		
+		//On decrit les descripteurs et keypoins
+		FeatureDetector orbDetector = FeatureDetector.create(FeatureDetector.ORB);
+		DescriptorExtractor orbExtractor = DescriptorExtractor.create(DescriptorExtractor.ORB);
+		
+		//On fait les keypoints
+		MatOfKeyPoint panneauKeypoints = new MatOfKeyPoint();
+		orbDetector.detect(grayPanneau, panneauKeypoints);
+		
+		MatOfKeyPoint panneauTestKeypoints = new MatOfKeyPoint();
+		orbDetector.detect(gray_panneau_test, panneauTestKeypoints);
+		
+		//On fait les descripteurs
+		Mat panneauDescriptor = new Mat(panneau.rows(), panneau.cols(),panneau.type());
+		orbExtractor.compute(grayPanneau,panneauKeypoints, panneauDescriptor);
+		
+		Mat panneauTestDescriptor = new Mat(panneau_test.rows(), panneau_test.cols(),panneau_test.type());
+		orbExtractor.compute(gray_panneau_test,panneauTestKeypoints, panneauTestDescriptor);
+		
+		//On fait le matching
+		MatOfDMatch matchs = new MatOfDMatch();
+		DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
+		matcher.match(panneauDescriptor,panneauTestDescriptor, matchs);
+		System.out.println(matchs.dump());
+		Mat matchedImage = new Mat(panneau_test.rows(),panneau_test.cols()*2,panneau_test.type());
+		Features2d.drawMatches(panneau,panneauKeypoints,panneau_test,panneauTestKeypoints,matchs,matchedImage);
+		ImShow("match",matchedImage);
 		return -1;
 		
 		
