@@ -1,7 +1,10 @@
 package test;
 import java.awt.Dimension;
+
+
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,13 +33,18 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
-import org.opencv.features2d.DMatch;
+//import org.opencv.features2d.DMatch;
 import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.features2d.Features2d;
-import org.opencv.highgui.Highgui;
+
+//import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
+
+
+
+import org.opencv.imgcodecs.Imgcodecs;
 
 public class MaBibliothequeTraitementImageEtendue {
 	//Contient toutes les méthodes necessaires à la transformation des images
@@ -60,7 +68,7 @@ public class MaBibliothequeTraitementImageEtendue {
 	//Methode qui permet d'afficher une image sur un panel
 	public static void afficheImage(String title, Mat img){
 		MatOfByte matOfByte=new MatOfByte();
-		Highgui.imencode(".png",img,matOfByte);
+		Imgcodecs.imencode(".png",img,matOfByte);
 		byte[] byteArray=matOfByte.toArray();
 		BufferedImage bufImage=null;
 		try{
@@ -192,72 +200,68 @@ public class MaBibliothequeTraitementImageEtendue {
 
 	
 	//methode à completer
-	public static double Similitude(Mat panneau,String signfile) {
-/*
+	public static double Similitude(Mat object,String signfile) {
 		// Conversion du signe de reference en niveaux de gris et normalisation
-		Mat panneauref = Highgui.imread(signfile);
-		Mat graySign = new Mat(panneauref.rows(), panneauref.cols(), panneauref.type());
-		Imgproc.cvtColor(panneauref, graySign, Imgproc.COLOR_BGRA2GRAY);
-		Core.normalize(graySign, graySign, 0, 255, Core.NORM_MINMAX);
-		Mat signeNoirEtBlanc=new Mat();
-		
+				Mat panneauref = Imgcodecs.imread(signfile);	float somme=0;
+				//int n=336;
+				
+				float moyenne=0;;
+				Mat graySign = new Mat(panneauref.rows(), panneauref.cols(), panneauref.type());
+				Imgproc.cvtColor(panneauref, graySign, Imgproc.COLOR_BGRA2GRAY);
+				Core.normalize(graySign, graySign, 0, 255, Core.NORM_MINMAX);
+				Mat signeNoirEtBlanc=new Mat();
+				
 
 
-		//Conversion du panneau extrait de l'image en gris et normalisation et redimensionnement à la taille du panneau de réference
-		Mat grayObject = new Mat(panneauref.rows(), panneauref.cols(), panneauref.type());
-		Imgproc.resize(object, object, graySign.size());
-		//afficheImage("Panneau extrait de l'image",object);
-		Imgproc.cvtColor(object, grayObject, Imgproc.COLOR_BGRA2GRAY);
-		Core.normalize(grayObject, grayObject, 0, 255, Core.NORM_MINMAX);
-		//Imgproc.resize(grayObject, grayObject, graySign.size());	
-		
-		
-		
-		//à compléter...
-		*/
-		
-		//On met les deux images en gris//
-		Mat panneau_test = Highgui.imread(signfile,Highgui.CV_LOAD_IMAGE_COLOR);
-		Mat grayPanneau = new Mat(panneau.rows(), panneau.cols(), panneau.type());
-		Imgproc.cvtColor(panneau, grayPanneau, Imgproc.COLOR_BGRA2GRAY);
-		Core.normalize(grayPanneau, grayPanneau, 0, 255, Core.NORM_MINMAX);
-		
-		Mat gray_panneau_test = new Mat(panneau_test.rows(),panneau_test.cols(),panneau_test.type());
-		Imgproc.cvtColor(panneau_test, gray_panneau_test, Imgproc.COLOR_BGRA2GRAY);
-		Core.normalize(gray_panneau_test, gray_panneau_test,0,255,Core.NORM_MINMAX);
-		
-		//On decrit les descripteurs et keypoins
-		FeatureDetector orbDetector = FeatureDetector.create(FeatureDetector.ORB);
-		DescriptorExtractor orbExtractor = DescriptorExtractor.create(DescriptorExtractor.ORB);
-		
-		//On fait les keypoints
-		MatOfKeyPoint panneauKeypoints = new MatOfKeyPoint();
-		orbDetector.detect(grayPanneau, panneauKeypoints);
-		
-		MatOfKeyPoint panneauTestKeypoints = new MatOfKeyPoint();
-		orbDetector.detect(gray_panneau_test, panneauTestKeypoints);
-		
-		//On fait les descripteurs
-		Mat panneauDescriptor = new Mat(panneau.rows(), panneau.cols(),panneau.type());
-		orbExtractor.compute(grayPanneau,panneauKeypoints, panneauDescriptor);
-		
-		Mat panneauTestDescriptor = new Mat(panneau_test.rows(), panneau_test.cols(),panneau_test.type());
-		orbExtractor.compute(gray_panneau_test,panneauTestKeypoints, panneauTestDescriptor);
-		
-		//On fait le matching
-		MatOfDMatch matchs = new MatOfDMatch();
-		DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
-		matcher.match(panneauDescriptor,panneauTestDescriptor, matchs);
-		System.out.println(matchs.dump());
-		Mat matchedImage = new Mat(panneau_test.rows(),panneau_test.cols()*2,panneau_test.type());
-		Features2d.drawMatches(panneau,panneauKeypoints,panneau_test,panneauTestKeypoints,matchs,matchedImage);
-		ImShow("match",matchedImage);
-		return -1;
-		
-		
-
-
-	}
-
+				//Conversion du panneau extrait de l'image en gris et normalisation et redimensionnement à la taille du panneau de réference
+				Mat sObject=new Mat();
+				Imgproc.resize(object, sObject,panneauref.size() );
+				Mat grayObject = new Mat(panneauref.rows(), panneauref.cols(), panneauref.type());
+				Imgproc.resize(object, object, graySign.size());
+				//afficheImage("Panneau extrait de l'image",object);
+				Imgproc.cvtColor(object, grayObject, Imgproc.COLOR_BGRA2GRAY);
+				Core.normalize(grayObject, grayObject, 0, 255, Core.NORM_MINMAX);
+				//Imgproc.resize(grayObject, grayObject, graySign.size());	
+				
+				
+				
+				//à compléter...
+				FeatureDetector orbDetector =FeatureDetector.create(FeatureDetector.ORB);
+				DescriptorExtractor orbExtractor =DescriptorExtractor.create(DescriptorExtractor.ORB);
+				MatOfKeyPoint objectKeypoints =new MatOfKeyPoint();
+				orbDetector.detect(grayObject , objectKeypoints);
+				
+				MatOfKeyPoint signKeypoints =new MatOfKeyPoint();
+				orbDetector.detect(graySign , signKeypoints);
+				
+				Mat objectDescriptor =new Mat (object.rows(),object.cols(),object.type());
+				orbExtractor.compute(grayObject, objectKeypoints,  objectDescriptor);
+				
+				Mat signDescriptor =new Mat (panneauref.rows(),panneauref.cols(),panneauref.type());
+				orbExtractor.compute(graySign, signKeypoints,  signDescriptor);
+				
+				//Matching
+				MatOfDMatch matchs =new MatOfDMatch();
+				DescriptorMatcher matcher =DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE);
+				matcher.match(objectDescriptor, signDescriptor,matchs);
+				//System.out.println(matchs.dump());
+				Mat matchedImage =new Mat(panneauref.rows(),panneauref.cols()*2,panneauref.type());
+				Features2d.drawMatches(sObject, objectKeypoints,panneauref,signKeypoints,matchs,matchedImage); 
+				//afficheImage("matched",matchedImage );
+				List<org.opencv.core.DMatch> l =matchs.toList();
+				
+				
+				for(int i=0;i<l.size();i++)
+				{  org.opencv.core.DMatch dmatch=l.get(i);
+				   somme=somme+dmatch.distance;
+				
+				
+				}
+				moyenne=somme/l.size();
+				//System.out.println(moyenne);
+				//System.out.println(contours.size());
+			
+				return moyenne;
+				}
 }
 
