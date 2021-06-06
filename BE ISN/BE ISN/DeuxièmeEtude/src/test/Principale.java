@@ -14,7 +14,7 @@ public class Principale {
 		MaBibliothequeTraitementImageEtendue.afficheImage("Image testée", m);
 		Mat transformee=MaBibliothequeTraitementImageEtendue.transformeBGRversHSV(m);
 		//la methode seuillage est ici extraite de l'archivage jar du meme nom 
-		Mat saturee=MaBibliothequeTraitementImageEtendue.seuillage(transformee, 6, 170, 110);
+		Mat saturee=MaBibliothequeTraitementImage.seuillage(transformee, 6, 170, 110);
 		Mat objetrond = null;
 
 		//Création d'une liste des contours à partir de l'image saturée
@@ -24,7 +24,7 @@ public class Principale {
 		//Pour tous les contours de la liste
 		for (MatOfPoint contour: ListeContours  ){
 			i++;
-			objetrond=MaBibliothequeTraitementImage.DetectForm(m,contour);
+			objetrond=MaBibliothequeTraitementImageEtendue.DetectForm(m,contour);
 
 			if (objetrond!=null){
 				MaBibliothequeTraitementImage.afficheImage("Objet rond detécté", objetrond);
