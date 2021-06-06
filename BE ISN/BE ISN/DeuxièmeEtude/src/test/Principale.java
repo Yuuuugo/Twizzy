@@ -12,7 +12,7 @@ public class Principale {
 	{
 		//Ouverture le l'image et saturation des rouges
 		System.loadLibrary("opencv_java2413");
-		Mat m=Highgui.imread("p10.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+		Mat m=Highgui.imread("p3.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
 		MaBibliothequeTraitementImageEtendue.afficheImage("Image testée", m);
 		Mat transformee=MaBibliothequeTraitementImageEtendue.transformeBGRversHSV(m);
 		//la methode seuillage est ici extraite de l'archivage jar du meme nom 
@@ -20,7 +20,7 @@ public class Principale {
 		Mat objetrond = null;
 
 		//Création d'une liste des contours à partir de l'image saturée
-		List<MatOfPoint> ListeContours= MaBibliothequeTraitementImageEtendue .ExtractContours(saturee);
+		List<MatOfPoint> ListeContours= MaBibliothequeTraitementImageEtendue.ExtractContours(saturee);
 		int i=0;
 		double [] scores=new double [6];
 		//Pour tous les contours de la liste
