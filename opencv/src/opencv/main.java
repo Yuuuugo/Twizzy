@@ -53,7 +53,7 @@ public class main {
 		//List<MatOfPoint> contours = DetecterContours_Seuil(mat,rouge_min, rouge_max, rouge_min_2,rouge_max_2);
 		List<Mat> panneaux = DetecterPanneau_Seuil(mat,rouge_min, rouge_max, rouge_min_2,rouge_max_2);
 		Mat panneau = panneaux.get(0);
-		Mat panneau_test = Highgui.imread("C:\\Users\\Hugo\\Desktop\\Plateau\\ref70.jpg");
+		Mat panneau_test = Highgui.imread("C:\\Users\\Hugo\\Desktop\\Plateau\\ref90.jpg");
 		Mat panneau_resize = MiseEchelle(panneau,panneau_test);
 		//ImShow("panneau_test",panneau_test);
 		//ImShow("resize",panneau_resize);

@@ -12,7 +12,7 @@ public class Principale {
 	{
 		//Ouverture le l'image et saturation des rouges
 		System.loadLibrary("opencv_java2413");
-		Mat m=Highgui.imread("p2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+		Mat m=Highgui.imread("p10.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
 		MaBibliothequeTraitementImageEtendue.afficheImage("Image testée", m);
 		Mat transformee=MaBibliothequeTraitementImageEtendue.transformeBGRversHSV(m);
 		//la methode seuillage est ici extraite de l'archivage jar du meme nom 
@@ -39,11 +39,14 @@ public class Principale {
 
 
 				//recherche de l'index du maximum et affichage du panneau detecté
-				double scoremax=-1;
+				double scoremax=Double.POSITIVE_INFINITY;
 				int indexmax=0;
 				for(int j=0;j<scores.length;j++){
-					if (scores[j]>scoremax){scoremax=scores[j];indexmax=j;}}	
-				if(scoremax<0){System.out.println("Aucun Panneau détécté");}
+					if (scores[j]<scoremax){
+						scoremax=scores[j];
+						indexmax=j;}}	
+				if(scoremax<0){
+					System.out.println("Aucun Panneau détécté");}
 				else{switch(indexmax){
 				case -1:;break;
 				case 0:System.out.println("Panneau 30 détécté");break;
@@ -51,7 +54,7 @@ public class Principale {
 				case 2:System.out.println("Panneau 70 détécté");break;
 				case 3:System.out.println("Panneau 90 détécté");break;
 				case 4:System.out.println("Panneau 110 détécté");break;
-				//case 5:System.out.println("Panneau interdiction de dépasser détécté");break;
+				case 5:System.out.println("Panneau interdiction de dépasser détécté");break;
 				}}
 
 			}
