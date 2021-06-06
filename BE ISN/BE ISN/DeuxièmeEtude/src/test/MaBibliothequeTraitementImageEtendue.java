@@ -192,10 +192,16 @@ public class MaBibliothequeTraitementImageEtendue {
 
 	
 	//methode à completer
-	public static double Similitude(Mat object,String signfile) {
+public static double Similitude(Mat object,String signfile) {
+		
 
 		// Conversion du signe de reference en niveaux de gris et normalisation
-		Mat panneauref = Highgui.imread(signfile);
+		//Mat panneauref = Imgcodecs.imread(signfile);
+		Mat panneauref =Highgui.imread(signfile,Highgui.CV_LOAD_IMAGE_COLOR);
+		float somme=0;
+		//int n=336;
+		
+		float moyenne=0;;
 		Mat graySign = new Mat(panneauref.rows(), panneauref.cols(), panneauref.type());
 		Imgproc.cvtColor(panneauref, graySign, Imgproc.COLOR_BGRA2GRAY);
 		Core.normalize(graySign, graySign, 0, 255, Core.NORM_MINMAX);
@@ -204,6 +210,8 @@ public class MaBibliothequeTraitementImageEtendue {
 
 
 		//Conversion du panneau extrait de l'image en gris et normalisation et redimensionnement à la taille du panneau de réference
+		Mat sObject=new Mat();
+		Imgproc.resize(object, sObject,panneauref.size() );
 		Mat grayObject = new Mat(panneauref.rows(), panneauref.cols(), panneauref.type());
 		Imgproc.resize(object, object, graySign.size());
 		//afficheImage("Panneau extrait de l'image",object);
@@ -214,13 +222,43 @@ public class MaBibliothequeTraitementImageEtendue {
 		
 		
 		//à compléter...
+		FeatureDetector orbDetector =FeatureDetector.create(FeatureDetector.ORB);
+		DescriptorExtractor orbExtractor =DescriptorExtractor.create(DescriptorExtractor.ORB);
+		MatOfKeyPoint objectKeypoints =new MatOfKeyPoint();
+		orbDetector.detect(grayObject , objectKeypoints);
 		
-		return -1;
+		MatOfKeyPoint signKeypoints =new MatOfKeyPoint();
+		orbDetector.detect(graySign , signKeypoints);
+		
+		Mat objectDescriptor =new Mat (object.rows(),object.cols(),object.type());
+		orbExtractor.compute(grayObject, objectKeypoints,  objectDescriptor);
+		
+		Mat signDescriptor =new Mat (panneauref.rows(),panneauref.cols(),panneauref.type());
+		orbExtractor.compute(graySign, signKeypoints,  signDescriptor);
+		
+		//Matching
+		MatOfDMatch matchs =new MatOfDMatch();
+		DescriptorMatcher matcher =DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE);
+		matcher.match(objectDescriptor, signDescriptor,matchs);
+		//System.out.println(matchs.dump());
+		Mat matchedImage =new Mat(panneauref.rows(),panneauref.cols()*2,panneauref.type());
+		Features2d.drawMatches(sObject, objectKeypoints,panneauref,signKeypoints,matchs,matchedImage); 
+		//afficheImage("matched",matchedImage );
+		//List<org.opencv.core.DMatch> l =matchs.toList();
+		List<DMatch>  l = matchs.toList();
 		
 		
-
-
-	}
+		for(int i=0;i<l.size();i++)
+		{ DMatch dmatch= l.get(i);
+		   somme=somme+dmatch.distance;
+		
+		
+		}
+		moyenne=somme/l.size();
+		//System.out.println(moyenne);
+		//System.out.println(contours.size());
+	
+		return moyenne;}
 
 }
 

@@ -4,13 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 import org.opencv.core.*;
 import org.opencv.highgui.*;
+
+
 public class Principale {
 
 	public static void main(String[] args)
 	{
 		//Ouverture le l'image et saturation des rouges
 		System.loadLibrary("opencv_java2413");
-		Mat m=Highgui.imread("p10.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+		Mat m=Highgui.imread("p2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
 		MaBibliothequeTraitementImageEtendue.afficheImage("Image testée", m);
 		Mat transformee=MaBibliothequeTraitementImageEtendue.transformeBGRversHSV(m);
 		//la methode seuillage est ici extraite de l'archivage jar du meme nom 
@@ -49,7 +51,7 @@ public class Principale {
 				case 2:System.out.println("Panneau 70 détécté");break;
 				case 3:System.out.println("Panneau 90 détécté");break;
 				case 4:System.out.println("Panneau 110 détécté");break;
-				case 5:System.out.println("Panneau interdiction de dépasser détécté");break;
+				//case 5:System.out.println("Panneau interdiction de dépasser détécté");break;
 				}}
 
 			}
