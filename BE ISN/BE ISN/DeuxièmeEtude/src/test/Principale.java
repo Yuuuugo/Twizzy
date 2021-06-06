@@ -1,21 +1,20 @@
+package test;
 
 import java.util.Arrays;
 import java.util.List;
-
 import org.opencv.core.*;
 import org.opencv.highgui.*;
-import utilitaireAgreg.MaBibliothequeTraitementImage;
 public class Principale {
 
 	public static void main(String[] args)
 	{
 		//Ouverture le l'image et saturation des rouges
-		System.loadLibrary("opencv_java249");
+		System.loadLibrary("opencv_java2413");
 		Mat m=Highgui.imread("p10.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
 		MaBibliothequeTraitementImageEtendue.afficheImage("Image testée", m);
 		Mat transformee=MaBibliothequeTraitementImageEtendue.transformeBGRversHSV(m);
 		//la methode seuillage est ici extraite de l'archivage jar du meme nom 
-		Mat saturee=MaBibliothequeTraitementImage.seuillage(transformee, 6, 170, 110);
+		Mat saturee=MaBibliothequeTraitementImageEtendue.seuillage(transformee, 6, 170, 110);
 		Mat objetrond = null;
 
 		//Création d'une liste des contours à partir de l'image saturée
