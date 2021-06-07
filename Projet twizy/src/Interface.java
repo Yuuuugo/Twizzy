@@ -223,7 +223,7 @@ public class Interface extends JFrame {
 
 
 						//recherche de l'index du maximum et affichage du panneau detecté
-						double scoremax=-1;
+						double scoremax=Double.POSITIVE_INFINITY;
 						int indexmax=0;
 						for(int j=0;j<scores.length;j++){
 							if (scores[j]<scoremax){scoremax=scores[j];indexmax=j;}}	
@@ -373,7 +373,7 @@ public class Interface extends JFrame {
 			scores[3]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref90.jpg");
 			scores[4]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref110.jpg");
 			scores[5]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"refdouble.jpg");
-			double scoremax=scores[0];
+			double scoremax=Double.POSITIVE_INFINITY;
 			for(int j=1;j<scores.length;j++){
 				if (scores[j]<scoremax){scoremax=scores[j];indexmax=j;}}	
 
