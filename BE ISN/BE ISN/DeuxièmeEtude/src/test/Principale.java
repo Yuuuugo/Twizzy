@@ -45,7 +45,7 @@ public class Principale {
 					if (scores[j]<scoremax){
 						scoremax=scores[j];
 						indexmax=j;}}	
-				if(scoremax<0){
+				if(scoremax==Double.POSITIVE_INFINITY){
 					System.out.println("Aucun Panneau détécté");}
 				else{switch(indexmax){
 				case -1:;break;
