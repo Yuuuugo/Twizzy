@@ -8,7 +8,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 
 import org.opencv.core.Core;
 import org.opencv.core.DMatch;
@@ -219,4 +224,24 @@ public static double Similitude(Mat object,String signfile) {
 		return moyenne;}
 
 	
+
+	public static void afficheImage(String title, Mat img){
+		MatOfByte matOfByte=new MatOfByte();
+		Imgcodecs.imencode(".png",img,matOfByte);
+		byte[] byteArray=matOfByte.toArray();
+		BufferedImage bufImage=null;
+		try{
+			InputStream in=new ByteArrayInputStream(byteArray);
+			bufImage=ImageIO.read(in);
+			JFrame frame=new JFrame();
+			frame.setTitle(title);
+			frame.getContentPane().add(new JLabel(new ImageIcon(bufImage)));
+			frame.pack();
+			frame.setVisible(true);
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 }

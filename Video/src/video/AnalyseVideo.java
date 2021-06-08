@@ -28,6 +28,9 @@ import org.opencv.core.Size;
 //import org.opencv.highgui.VideoCapture;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
+import org.opencv.highgui.Highgui;
+import org.opencv.imgproc.Imgproc;
+import java.awt.image.BufferedImage;
 
 import Utilitaires.Interface;
 import Utilitaires.MaBibliothequeTraitementImage;
@@ -57,7 +60,7 @@ public class AnalyseVideo {
 
 			while (camera.read(frame)) {
 				if (Trigger==true) {
-					for (int j=0;j<40;j++) {
+					for (int j=0;j<30;j++) {
 						camera.read(frame);
 					}
 				}
@@ -72,16 +75,41 @@ public class AnalyseVideo {
 				List<MatOfPoint> ListeContours= MaBibliothequeTraitementImageEtendue.ExtractContours(saturee);
 				//Détection des objets
 				for (MatOfPoint contour: ListeContours  ){
+					
 					objetrond=Function.DetectForm(frame,contour);
 					int indexmax=Function.identifiepanneau(objetrond);
 					switch(indexmax){
 					case -1:;break;
-					case 0:System.out.println("Panneau 30 détécté");break;
-					case 1:System.out.println("Panneau 50 détécté");break;
-					case 2:System.out.println("Panneau 70 détécté");break;
-					case 3:System.out.println("Panneau 90 détécté");break;
-					case 4:System.out.println("Panneau 110 détécté");break;
-					case 5:System.out.println("Panneau interdiction de dépasser détécté");break;
+					case 0:
+						System.out.println("Panneau 30 détécté");
+						Function.afficheImage("Image saturee",saturee);
+						Function.afficheImage("Panneau detecte",objetrond);
+					break;
+					case 1:
+						System.out.println("Panneau 50 détécté");
+						Function.afficheImage("Image saturee",saturee);
+						Function.afficheImage("Panneau detecte",objetrond);
+					break;
+					case 2:
+						System.out.println("Panneau 70 détécté");
+						Function.afficheImage("Image saturee",saturee);
+						Function.afficheImage("Panneau detecte",objetrond);
+					break;
+					case 3:
+						System.out.println("Panneau 90 détécté");
+						Function.afficheImage("Image saturee",saturee);
+						Function.afficheImage("Panneau detecte",objetrond);
+					break;
+					case 4:
+						System.out.println("Panneau 110 détécté");
+						Function.afficheImage("Image saturee",saturee);
+						Function.afficheImage("Panneau detecte",objetrond);
+					break;
+					case 5:
+						System.out.println("Panneau interdiction de dépasser détécté");
+						Function.afficheImage("Image saturee",saturee);
+						Function.afficheImage("Panneau detecte",objetrond);
+					break;
 					}
 					if (indexmax>=0) {
 						Trigger=true;
