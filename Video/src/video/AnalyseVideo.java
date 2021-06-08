@@ -32,7 +32,6 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 import java.awt.image.BufferedImage;
 
-import Utilitaires.Interface;
 import Utilitaires.MaBibliothequeTraitementImage;
 import Utilitaires.MaBibliothequeTraitementImageEtendue;
 
@@ -82,32 +81,26 @@ public class AnalyseVideo {
 					case -1:;break;
 					case 0:
 						System.out.println("Panneau 30 détécté");
-						Function.afficheImage("Image saturee",saturee);
 						Function.afficheImage("Panneau detecte",objetrond);
 					break;
 					case 1:
 						System.out.println("Panneau 50 détécté");
-						Function.afficheImage("Image saturee",saturee);
 						Function.afficheImage("Panneau detecte",objetrond);
 					break;
 					case 2:
 						System.out.println("Panneau 70 détécté");
-						Function.afficheImage("Image saturee",saturee);
 						Function.afficheImage("Panneau detecte",objetrond);
 					break;
 					case 3:
 						System.out.println("Panneau 90 détécté");
-						Function.afficheImage("Image saturee",saturee);
 						Function.afficheImage("Panneau detecte",objetrond);
 					break;
 					case 4:
 						System.out.println("Panneau 110 détécté");
-						Function.afficheImage("Image saturee",saturee);
 						Function.afficheImage("Panneau detecte",objetrond);
 					break;
 					case 5:
 						System.out.println("Panneau interdiction de dépasser détécté");
-						Function.afficheImage("Image saturee",saturee);
 						Function.afficheImage("Panneau detecte",objetrond);
 					break;
 					}
