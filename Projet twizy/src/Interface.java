@@ -36,9 +36,13 @@ public class Interface extends JFrame {
 	private JPanel contentPane;
 	private JTextField imgFile;
 	private JTextArea panneau;
+	private JTextArea panneau_2;
+	private JTextArea panneau_3;
 	private JPanel panel_0;
 	private JPanel panel_1 ;
 	private static JPanel panel_2 ;
+	private static JPanel panel_3;
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -55,14 +59,14 @@ public class Interface extends JFrame {
 
 	public Interface() throws IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(50, 1, 1200, 700);
+		setBounds(50, 1, 1470, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		contentPane.setBackground(Color.orange);
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 10, 1164, 639);
+		panel.setBounds(10, 10, 1430, 639);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -76,13 +80,24 @@ public class Interface extends JFrame {
 
 		panel_1 = new JPanel();
 		panel_1.setBackground(Color.lightGray);
-		panel_1.setBounds(274, 46, 880, 582); //emplacement image analysée
+		panel_1.setBounds(274, 46, 880, 582); //emplacement image analysée 
 		panel.add(panel_1);
 		
 		panel_2 = new JPanel();
 		panel_2.setBackground(Color.lightGray);
-		panel_2.setBounds(10, 200, 254, 254); //emplacement panneau 
+		panel_2.setBounds(10, 200, 254, 254); //emplacement panneau détecté méthode 1
 		panel.add(panel_2);
+		
+		panel_3 = new JPanel();
+		panel_3.setBackground(Color.lightGray);
+		panel_3.setBounds(1165, 45, 254, 254); //emplacement panneau détecté méthode 2
+		panel.add(panel_3);
+		
+		panel_0 = new JPanel();
+		panel_0.setBackground(Color.lightGray);
+		panel_0.setBounds(1165, 352, 254, 254); //emplacement panneau détecté méthode 3
+		panel.add(panel_0);
+
 
 		
 		JButton btnChargerImage = new JButton("Charger l'image sélectionnée");
@@ -157,7 +172,7 @@ public class Interface extends JFrame {
 		btnSaturationRouge.setBounds(594, 10, 200, 20);
 		panel.add(btnSaturationRouge);
 
-		JButton btnContours = new JButton("Detection des contours de l'image");
+		JButton btnContours = new JButton("Détection des contours de l'image");
 		btnContours.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panneau.setText("");
@@ -193,7 +208,7 @@ public class Interface extends JFrame {
 		btnContours.setBounds(804, 10, 250, 20);
 		panel.add(btnContours);
 
-		JButton btnMatching = new JButton("Detection");
+		JButton btnMatching = new JButton("Détection méthode 1");
 		btnMatching.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String fileImg = "";
@@ -268,13 +283,33 @@ public class Interface extends JFrame {
 			}
 		}
 				);
-		btnMatching.setBounds(65, 170, 140, 20);
+		btnMatching.setBounds(35, 170, 200, 20);
 		panel.add(btnMatching);
 
 		panneau = new JTextArea();
 		panneau.setBounds(10, 460, 254, 20);
 		panel.add(panneau);
 		panneau.setColumns(10);
+		
+		// Bouton détection méthode 2
+		JButton btnMatching2 = new JButton("Detection méthode 2");
+		btnMatching2.setBounds(1190, 20, 200, 20);
+		panel.add(btnMatching2);
+
+		panneau_2 = new JTextArea();
+		panneau_2.setBounds(1165, 302, 254, 20);
+		panel.add(panneau_2);
+		panneau_2.setColumns(10);
+		
+		// Bouton détection méthode 3
+		JButton btnMatching3 = new JButton("Detection méthode 3");
+		btnMatching3.setBounds(1190, 330, 200, 20);
+		panel.add(btnMatching3);
+
+		panneau_3 = new JTextArea();
+		panneau_3.setBounds(1165, 608, 254, 20);
+		panel.add(panneau_3);
+		panneau_2.setColumns(10);
 
 
 		//Bouton Vidéo
