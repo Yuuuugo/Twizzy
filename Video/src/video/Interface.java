@@ -308,16 +308,17 @@ public class Interface extends JFrame {
 		VideoCapture camera = new VideoCapture(nomVideo);
 
 		while (camera.read(frame)) {
+			/*
 			if (detecte==true) {
-				for (int j=0;j<40;j++) {
+				for (int j=0;j<5;j++) {
 					camera.read(frame);
 				}
-			}
+			}*/
 			String fileImg = "";
 
 			panel_1.removeAll();
 
-			panel_1.add(new JLabel(new ImageIcon(MaBibliothequeTraitementImage.Mat2bufferedImage(frame))));
+			panel_1.add(new JLabel(new ImageIcon(Function.Mat2bufferedImage(frame))));
 			panel_1.repaint();
 			panel_1.validate();
 
@@ -332,7 +333,7 @@ public class Interface extends JFrame {
 			int indexmax=0;
 			for (MatOfPoint contour: ListeContours  ){
 				objetrond=Function.DetectForm(frame,contour);
-				indexmax=identifiepanneau(objetrond);
+				indexmax=Function.identifiepanneau(objetrond);
 				switch(indexmax){
 				case -1:
 					break;
@@ -370,24 +371,6 @@ public class Interface extends JFrame {
 			panel_2.add(new JLabel(new ImageIcon(fileImg)));
 			panel_2.validate();	
 		}
-	}
-
-	public static int identifiepanneau(Mat objetrond){
-		double [] scores=new double [6];
-		int indexmax=-1;
-		if (objetrond!=null){
-			scores[0]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref30.jpg");
-			scores[1]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref50.jpg");
-			scores[2]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref70.jpg");
-			scores[3]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref90.jpg");
-			scores[4]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"ref110.jpg");
-			scores[5]=MaBibliothequeTraitementImageEtendue.Similitude(objetrond,"refdouble.jpg");
-			double scoremax=Double.POSITIVE_INFINITY;
-			for(int j=1;j<scores.length;j++){
-				if (scores[j]<scoremax){scoremax=scores[j];indexmax=j;}}	
-
-		}
-		return indexmax;
 	}
 }
 

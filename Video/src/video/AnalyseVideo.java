@@ -77,6 +77,7 @@ public class AnalyseVideo {
 					
 					objetrond=Function.DetectForm(frame,contour);
 					int indexmax=Function.identifiepanneau(objetrond);
+					if (objetrond!=null && objetrond.cols()>6 && objetrond.rows()>6){
 					switch(indexmax){
 					case -1:;break;
 					case 0:
@@ -107,6 +108,7 @@ public class AnalyseVideo {
 					if (indexmax>=0) {
 						Trigger=true;
 					}
+				}
 				}
 			vidpanel.repaint();
 		}

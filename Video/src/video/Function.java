@@ -67,7 +67,7 @@ public class Function {
 
 			double scoremax=Double.POSITIVE_INFINITY;
 
-			for(int j=1;j<scores.length;j++){
+			for(int j=0;j<scores.length;j++){
 				if (scores[j]<scoremax){
 					scoremax=scores[j];
 					indexmax=j;}}	
