@@ -12,8 +12,8 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
-import Utilitaire.MaBibliothequeTraitementImage;
-import Utilitaire.MaBibliothequeTraitementImageEtendue;
+import Utilitaires.MaBibliothequeTraitementImage;
+import Utilitaires.MaBibliothequeTraitementImageEtendue;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;

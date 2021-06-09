@@ -34,7 +34,7 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
-import Utilitaire.MaBibliothequeTraitementImageEtendue;
+import Utilitaires.MaBibliothequeTraitementImageEtendue;
 
 public class Function {
 

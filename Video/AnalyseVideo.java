@@ -32,15 +32,14 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 import java.awt.image.BufferedImage;
 
-import Utilitaire.MaBibliothequeTraitementImage;
-import Utilitaire.MaBibliothequeTraitementImageEtendue;
+import Utilitaires.MaBibliothequeTraitementImage;
+import Utilitaires.MaBibliothequeTraitementImageEtendue;
 
 import org.opencv.imgcodecs.Imgcodecs;
 //import org.opencv.videoio.VideoCapture;
 public class AnalyseVideo {
 	static {
-		System.loadLibrary("opencv_java340");
-		System.loadLibrary("opencv_ffmpeg340_64");
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	}
 
 	static Mat imag = null;
