@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.opencv.core.Mat"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="Utilitaires.MaBibliothequeTraitementImageEtendue"/>
+    <fullyQualifiedTypeName name="Utilitaires.MaBibliothequeTraitementImage"/>
+    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+    <fullyQualifiedTypeName name="tesseract.ScannedImage"/>
+    <fullyQualifiedTypeName name="tesseract.Preparation"/>
+</qualifiedTypeNameHistroy>

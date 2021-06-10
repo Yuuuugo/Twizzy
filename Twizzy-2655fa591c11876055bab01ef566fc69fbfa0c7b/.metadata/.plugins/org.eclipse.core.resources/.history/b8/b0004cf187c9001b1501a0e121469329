@@ -1,0 +1,57 @@
+
+package tesseract;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.List;
+
+import org.opencv.core.Mat;
+import org.opencv.highgui.Highgui;
+
+import Utilitaires.MaBibliothequeTraitementImage;
+import Utilitaires.MaBibliothequeTraitementImageEtendue;
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
+  
+public class ScannedImage {
+    public static void main(String[] args)
+    {
+        Tesseract tesseract = new Tesseract();
+        try {
+  
+            tesseract.setDatapath("D:/Tess4J/tessdata");
+  
+            // the path of your tess data folder
+            // inside the extracted file
+            Mat imageOriginale=Highgui.imread("ref110.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+            String text = tesseract.doOCR(new File("test70.png"));
+            //(new File("test70.png")
+            // path of your image file
+            System.out.print(text);
+        }
+        catch (TesseractException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public static String reconnaissance(Mat Image) {
+    	Mat Im = Preparation.transformation(Image);
+    	Tesseract tesseract = new Tesseract();
+    	String text = "";
+    	 try {
+    		  
+             tesseract.setDatapath("D:/Tess4J/tessdata");
+   
+             // the path of your tess data folder
+             // inside the extracted file
+             BufferedImage Atester = MaBibliothequeTraitementImage.Mat2bufferedImage(Im);
+            text = tesseract.doOCR();
+             // path of your image file
+         }
+         catch (TesseractException e) {
+             e.printStackTrace();
+         }
+    	 return text;
+    }
+    
+}
